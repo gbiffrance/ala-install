@@ -1,0 +1,23 @@
+[solr-server]
+192.168.0.18
+
+[solr-server:vars]
+is_vagrant=false
+local_repo_dir = ~/.ala
+data_dir=/data
+
+####################### SOLR #######################
+
+solr_hostname = 192.168.0.18
+solr_url = http://192.168.0.18/solr
+solr_base_url = http://192.168.0.18
+solr_context_path = /solr
+
+auth_base_url=https://auth.ala.org.au
+auth_cas_url=https://auth.ala.org.au/cas
+
+####### When near the GBIF building (e.g. in Europe) the GBIF nexus will likely be fastest #########
+use_gbif_nexus=true
+
+####### Disable SDS checks for the demo
+sds_enabled=false

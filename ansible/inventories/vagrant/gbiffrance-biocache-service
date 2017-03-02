@@ -1,0 +1,60 @@
+[biocache]
+recherche-ws.gbif.fr
+
+[biocache:vars]
+local_repo_dir = ~/.ala
+data_dir=/data
+is_vagrant=true
+
+#
+# Services deployed as part of this script
+#
+
+biocache_db_host = 192.168.0.19
+cassandra_listen_host = 9160
+
+biocache_service_hostname = recherche-ws.gbif.fr
+biocache_service_url = http://recherche-ws.gbif.fr
+biocache_service_base_url = http://recherche-ws.gbif.fr
+biocache_service_context_path = 
+
+biocache_hub_hostname = recherche.gbif.fr
+biocache_hub_url = http://recherche.gbif.fr
+biocache_hub_base_url = http://recherche.gbif.fr
+biocache_hub_context_path = 
+
+solr_hostname = vm-5:8080
+solr_url = http://vm-5:8080/solr
+solr_base_url = http://vm-5:8080
+solr_context_path = /solr
+
+collectory_hostname = metadonnee.gbif.fr
+collectory_url = http://metadonnee.gbif.fr
+collectory_base_url = http://metadonnee.gbif.fr
+collectory_context_path = 
+
+#
+# Other services not deployed as part of this script
+#
+
+biocache_sds_url = http://portail.gbif.fr
+bie_service_url = http://metadonnee.gbif.fr/ws
+bie_url = http://metadonnee.gbif.fr
+layers_service_url = http://metadonnee.gbif.fr/ws
+lists_service_url = http://metadonnee.gbif.fr
+logger_url = http://metadonnee.gbif.fr
+
+#
+# Configuration properties
+#
+
+caches_layers_enabled = false
+caches_log_enabled = false
+caches_auth_enabled = false
+caches_collections_enabled = false
+name_index_dir = /data/lucene/namematching
+sample_files = none
+default_country = France
+layers_service_sampling = true
+bie_service_enabled = false
+userdetails_url=

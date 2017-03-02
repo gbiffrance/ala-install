@@ -1,0 +1,84 @@
+[collectory]
+metadonnee.gbif.fr
+
+[collectory:vars]
+is_vagrant=false
+local_repo_dir = ~/.ala
+data_dir=/data
+
+demo_hostname = portail.gbif.fr
+
+
+####################### Collectory #######################
+
+collectory_app = gbiffrance-collectory
+collectory_hostname = metadonnee.gbif.fr
+collectory_url = http://metadonnee.gbif.fr
+collectory_base_url = http://metadonnee.gbif.fr
+collectory_context_path = 
+collectory_db_host_address = localhost
+collectory_db_host = localhost
+collectory_db_user = collectory
+collectory_db_password = password
+
+orgNameLong = Global Biodiversity Information Facility France
+orgNameShort = GBIF France
+
+# CAS
+uri_filter_pattern = /dummy
+
+# Security bypass
+security_bypass = true
+
+# External API access
+api_key= to_be_added
+
+# Skinning
+skin = generic
+
+# Map config
+collections_map_lat = 48.8534100
+collections_map_lon = 2.3488000
+collections_map_zoom = 5
+
+# Project name
+orgNameShort = GBIF France
+orgNameLong = Global Biodiversity Facility France
+region = France
+
+# EML config
+eml_delivery_point = 43 rue Buffon
+eml_city = Paris
+eml_admin_area = France
+eml_postal_code = 75005
+eml_country = France
+
+# Disable UI components
+disable_map = true
+disable_alerts = true
+disable_logger = false
+
+biocache_hub_url = http://recherche.gbif.fr
+biocache_service_url = http://recherche-ws.gbif.fr
+logger_url = http://portail.gbif.fr/logger-service
+
+############### Auth Server #########
+auth_base_url=https://auth.ala.org.au
+auth_cas_url=https://auth.ala.org.au/cas
+
+# Whether to check API keys for incoming write requests
+api_key_check_enabled = false
+
+# GBIF base URL for webservices
+gbifApiUrl=http://api.gbif.org/v1
+
+# Logger URL
+logger_webservice_url = http://portail.gbif.fr/logger-service/service
+
+####### When near the GBIF building (e.g. in Europe) the GBIF nexus will likely be fastest #########
+use_gbif_nexus=true
+
+collectory_maven_repo_ws_url = http://repository.gbif.org/service/local/artifact/maven/redirect?r=gbif-france-releases&g=fr.gbif.portail&a=gbiffrance-collectory&v=LATEST&e=war&c=
+
+####### Disable SDS checks for the demo
+sds_enabled=false
