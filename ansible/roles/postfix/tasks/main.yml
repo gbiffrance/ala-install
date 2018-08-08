@@ -1,5 +1,0 @@
-- name: Install Postfix mail server
-  apt: pkg="postfix" state=present
-  tags:
-    - postfix
-  

@@ -1,9 +1,0 @@
-- hosts: alerts-service
-  roles:
-    - common
-    - postfix    
-    - java
-    - tomcat
-    - apache
-    - mysql    
-    - alerts

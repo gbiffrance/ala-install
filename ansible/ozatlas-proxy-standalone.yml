@@ -1,8 +1,0 @@
-- hosts: ozatlas-proxy
-  roles:
-    - common
-    - java
-    - tomcat
-    - apache
-    - mysql    
-    - ozatlas-proxy

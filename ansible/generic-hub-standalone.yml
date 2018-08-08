@@ -1,7 +1,0 @@
-- hosts: generic-hub-standalone
-  roles:
-    - common
-    - java
-    - tomcat
-    - apache
-    - { role: biocache-hub, biocache_hub: generic-hub, proxy_root_context_to: generic-hub }

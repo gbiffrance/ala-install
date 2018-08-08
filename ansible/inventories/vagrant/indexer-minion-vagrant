@@ -1,7 +1,0 @@
-[indexer-minion]
-vagrant1
-  
-[indexer-minion:vars]
-is_vagrant=true
-data_dir=/data
-

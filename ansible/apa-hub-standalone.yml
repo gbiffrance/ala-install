@@ -1,7 +1,0 @@
-- hosts: apa-hub
-  roles:
-    - common
-    - java
-    - tomcat
-    - apache
-    - { role: biocache-hub, biocache_hub: apa-hub }

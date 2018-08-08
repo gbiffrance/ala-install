@@ -1,6 +1,0 @@
-- hosts: cassandra3
-  roles:
-    - ebs-setup
-    - common
-    - java8
-    - cassandra3

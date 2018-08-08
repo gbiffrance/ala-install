@@ -1,5 +1,0 @@
-- hosts: nameindexer
-  roles:
-    - common
-    - java
-    - nameindexer

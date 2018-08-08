@@ -1,3 +1,0 @@
-- hosts: fieldguide
-  roles:
-    - wkhtmltopdf

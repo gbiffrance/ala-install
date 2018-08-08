@@ -1,2 +1,0 @@
-- name: restart web2py
-  service: name=web2py state=restarted

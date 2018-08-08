@@ -1,7 +1,0 @@
-- hosts: ala-bie
-  roles:
-    - common
-    - java
-    - apache
-    - tomcat
-    - ala-bie

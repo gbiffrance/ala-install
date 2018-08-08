@@ -1,5 +1,0 @@
-# assets
-version: "1.0"
-artifactId: "dashboard"
-groupId: "au.org.ala"
-dashboard_war_url: "{{maven_repo_ws_url}}"

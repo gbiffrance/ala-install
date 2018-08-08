@@ -1,4 +1,0 @@
-- hosts: nameindex
-  roles:
-    - common
-    - nameindex

@@ -1,3 +1,0 @@
-# common variables across all roles
-cassandra_user: cassandra
-# package variables used for RedHat

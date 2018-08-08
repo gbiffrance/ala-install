@@ -1,7 +1,0 @@
-- hosts: ipt
-  roles:
-    - java
-    - common
-    - tomcat
-    - apache
-    - ipt

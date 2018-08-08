@@ -1,8 +1,0 @@
-- hosts: webapi_standalone
-  roles:
-    - common
-    - java
-    - mysql
-    - apache
-    - tomcat
-    - webapi_instance

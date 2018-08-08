@@ -1,7 +1,0 @@
-- hosts: bie-webapp
-  roles:
-    - common
-    - java
-    - apache
-    - tomcat
-    - bie-webapp

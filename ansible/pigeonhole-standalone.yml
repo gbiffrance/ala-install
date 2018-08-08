@@ -1,7 +1,0 @@
-- hosts: pigeonhole
-  roles:
-    - common
-    - java
-    - tomcat
-    - apache
-    - pigeonhole

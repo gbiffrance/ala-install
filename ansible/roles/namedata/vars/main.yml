@@ -1,2 +1,0 @@
-# nameindex_to_use - recognised values = 'ala', 'merged', 'col'
-namedata_variant: "{{ namedata_to_use | default('ala') }}"

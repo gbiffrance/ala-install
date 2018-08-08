@@ -1,8 +1,0 @@
-- hosts: volunteer-portal
-  roles:
-    - common
-    - java
-    - apache
-    - tomcat
-    - postgresql
-    - volunteer_portal

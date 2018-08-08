@@ -1,7 +1,0 @@
-- hosts: tviewer
-  roles:
-    - common
-    - java
-    - apache
-    - tomcat
-    - tviewer
