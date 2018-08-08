@@ -13,62 +13,67 @@
 ###############################################################################
 
 [ala-demo]
-ala-demo
+alf-recette.gbif.fr
 
 [ala-demo:vars]
 # Mounted storage is usually /mnt on EC2. Create a symlink to /mnt -> /data
 data_dir=/data
+ansible_password=lecoq2015
 
-demo_hostname = ala-demo.org
+demo_hostname = alf-recette.gbif.fr
 
 ####################### Biocache ##############################################
 
 biocache_db_host = localhost
 cassandra_listen_host = localhost
-biocache_service_hostname = ala-demo.org
+biocache_service_hostname = alf-recette.gbif.fr
 
-biocache_service_url = http://ala-demo.org/biocache-service
-biocache_service_base_url = http://ala-demo.org
+biocache_service_url = http://alf-recette.gbif.fr/biocache-service
+biocache_service_base_url = http://alf-recette.gbif.fr
 biocache_service_context_path = /biocache-service
 logging_enabled=true
 default_country=
 
 ####################### Hub ###################################################
 
-biocache_hub_hostname = ala-demo.org
-biocache_hub_url = http://ala-demo.org/generic-hub
-biocache_hub_base_url = http://ala-demo.org
+biocache_hub_hostname = alf-recette.gbif.fr
+biocache_hub_url = http://alf-recette.gbif.frgeneric-hub
+biocache_hub_base_url = http://alf-recette.gbif.fr
 biocache_hub_context_path = /generic-hub
 userdetails_url=https://auth.ala.org.au/userdetails/userDetails
 
 org_url=http://www.csiro.au
 
-orgNameLong=Bla
-orgNameShort=bla
+orgNameLong=GBIF France
+orgNameShort=GBIF France
 
-explore_your_area_lat = 54.00366
-explore_your_area_lng = -2.547855
-explore_your_area_location=Edinburgh
+explore_your_area_lat = 48.864716
+explore_your_area_lng = 2.349014.
+explore_your_area_location=Paris
 
-map_default_latitude = 54.00366
-map_default_longitude = -2.547855
+map_default_latitude = 48.864716
+map_default_longitude = 2.349014.
 map_default_zoom = 5
 
 skin_layout = generic
 
 ####################### Collectory ############################################
 
-collectory_hostname = ala-demo.org
-collectory_url = http://ala-demo.org/collectory
-collectory_base_url = http://ala-demo.org
+collectory_hostname = alf-recette.gbif.fr
+collectory_url = http://alf-recette.gbif.fr/collectory
+collectory_base_url = http://alf-recette.gbif.fr
 collectory_context_path = /collectory
 collectory_db_host_address = localhost
 collectory_db_host = localhost
-collectory_db_user = collectory
-collectory_db_password = password
+collectory_db_user = root
+collectory_db_password = test
 
-orgNameLong = UK demo
-orgNameShort = UK demo
+mysql_root_password=test
+login_user=root
+login-password=test
+
+orgNameLong = GBIF France test 
+orgNameShort = GBIF France test
 
 # CAS
 uri_filter_pattern = /dummy
@@ -83,21 +88,21 @@ api_key= to_be_added
 skin = generic
 
 # Map config
-collections_map_lat = 54.00366
-collections_map_lon = -2.547855
+collections_map_lat = 48.864716
+collections_map_lon = 2.349014
 collections_map_zoom = 5
 
 # Project name
-orgNameShort = UK demo
-orgNameLong = UK demo
-region = United Kingdom
+orgNameShort = GBIF France portal
+orgNameLong = GBIF France portal
+region = France
 
 # EML config
-eml_delivery_point = Smith Street
-eml_city = Edinburgh
-eml_admin_area = Scotland
-eml_postal_code = S21 2SS
-eml_country = United Kingdom
+eml_delivery_point = MNHN Géologie CP48 43 rue Buffon
+eml_city = Paris
+eml_admin_area = France
+eml_postal_code = 75005
+eml_country = France
 
 # Disable UI components
 disable_map = true
@@ -111,25 +116,25 @@ api_key_check_enabled = false
 gbifApiUrl=http://api.gbif.org/v1
 
 # Logger URL
-logger_webservice_url = http://ala-demo.org/logger-service/service
+logger_webservice_url = http://alf-recette.gbif.frlogger-service/service
 
 ####################### SOLR #######################
 
-solr_hostname = ala-demo.org
-solr_url = http://ala-demo.org/solr
-solr_base_url = http://ala-demo.org
+solr_hostname = alf-recette.gbif.fr
+solr_url = http://alf-recette.gbif.fr/solr
+solr_base_url = http://alf-recette.gbif.fr
 solr_context_path = /solr
 
-sandbox_hostname = ala-demo.org
-sandbox_url = http://ala-demo.org/sandbox
-sandbox_base_url = http://ala-demo.org
+sandbox_hostname = alf-recette.gbif.fr
+sandbox_url = http://alf-recette.gbif.fr/sandbox
+sandbox_base_url = http://alf-recette.gbif.fr
 sandbox_context_path = /sandbox
 
 ################# Logger Service ############
 
-logger_hostname = ala-demo.org
-logger_url = http://ala-demo.org/logger-service
-logger_base_url = http://ala-demo.org
+logger_hostname = alf-recette.gbif.fr
+logger_url = http://alf-recette.gbif.fr/logger-service
+logger_base_url = http://alf-recette.gbif.fr
 logger_context_path = /logger-service
 logger_db_name = logger
 logger_db_username = logger_user
