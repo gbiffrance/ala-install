@@ -1,0 +1,4 @@
+- hosts: keybase
+  roles:
+    - keybase
+

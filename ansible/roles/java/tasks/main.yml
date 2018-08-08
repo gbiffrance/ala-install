@@ -1,0 +1,7 @@
+- include: ../../common/tasks/setfacts.yml 
+
+- include: openjdk-java.yml
+  when: use_openjdk7 is defined and use_openjdk7
+
+- include: oracle-java8.yml
+  when: use_openjdk7 is not defined

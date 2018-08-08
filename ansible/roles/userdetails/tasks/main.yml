@@ -1,0 +1,75 @@
+- name: "set facts"
+  include_role:
+    name: common
+    tasks_from: setfacts
+  tags:
+  - setfacts
+  - userdetails
+
+- name: "Create system user for userdetails"
+  user:
+    name: userdetails
+    state: present
+    system: yes
+  tags:
+  - user
+  - userdetails
+
+- name: ensure target directories exist data subdirectories etc.
+  file:
+    path: "{{item}}"
+    state: directory
+    owner: userdetails
+    group: userdetails
+  with_items:
+    - "{{data_dir}}/userdetails"
+    - "{{data_dir}}/userdetails/config"
+    - "{{data_dir}}/userdetails/"
+    - "/var/log/atlas/userdetails"
+  tags:
+    - properties
+    - userdetails
+
+- name: set data ownership
+  file:
+    path: "{{data_dir}}/userdetails"
+    owner: userdetails
+    group: userdetails
+    recurse: true
+  tags:
+    - properties
+    - userdetails
+
+- name: copy userdetails-config.yml
+  template:
+    src: userdetails-config.yml
+    dest: "{{data_dir}}/userdetails/config/userdetails-config.yml"
+    owner: userdetails
+    group: userdetails
+  notify:
+    - restart userdetails
+  tags:
+    - properties
+    - userdetails
+
+- name: copy logback config
+  template:
+    src: logback.groovy
+    dest: "{{data_dir}}/userdetails/config/logback.groovy"
+    owner: userdetails
+    group: userdetails
+  tags:
+    - properties
+    - userdetails
+
+- name: add jar and service
+  include_role:
+    name: exec-jar
+  vars:
+    service_name: "userdetails"
+    jar_url: '{{ userdetails_jar_url }}'
+  tags:
+    - deploy
+    - service
+    - userdetails
+

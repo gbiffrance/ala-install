@@ -1,0 +1,8 @@
+- hosts: logger-service
+  roles:
+    - common
+    - java
+    - tomcat
+    - webserver
+    - mysql    
+    - logger-service

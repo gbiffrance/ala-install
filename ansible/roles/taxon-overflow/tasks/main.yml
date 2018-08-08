@@ -1,0 +1,67 @@
+- include: ../../common/tasks/setfacts.yml
+  tags:
+    - taxonoverflow
+
+- name: create DB
+  postgresql_db: name={{taxonoverflow_db_name | default('taxonoverflow') }} state=present
+  become_user: postgres
+  sudo: True
+  tags:
+    - db
+    - taxonoverflow
+
+- name: create database user 
+  postgresql_user: db={{taxonoverflow_db_name | default('taxonoverflow')}} name={{taxonoverflow_db_username | default('postgres')}} password={{taxonoverflow_db_password | default('postgres')}} priv=ALL state=present
+  become_user: postgres
+  sudo: True
+  tags:
+    - db
+    - taxonoverflow
+
+- name: ensure target directories exist [data subdirectories etc.]
+  file: path={{item}} state=directory owner={{tomcat_user}} group={{tomcat_user}}
+  with_items:
+    - "{{data_dir}}/taxonoverflow/config"
+    - "{{data_dir}}/taxonoverflow/elasticsearch"
+  tags:
+    - taxonoverflow
+    - properties
+
+- name: copy all config.properties
+  template: src=taxonoverflow-config.properties dest={{data_dir}}/taxonoverflow/config/taxonoverflow-config.properties
+  tags:
+    - taxonoverflow
+    - properties
+
+- name: set data ownership
+  file: path={{data_dir}}/taxonoverflow owner={{tomcat_user}} group={{tomcat_user}} recurse=true
+  notify: 
+    - restart tomcat
+  tags:
+    - taxonoverflow
+    - properties
+
+- include: ../../apache_vhost/tasks/main.yml context_path='{{ taxonoverflow_context_path }}' hostname='{{ taxonoverflow_hostname }}'
+  tags:
+    - taxonoverflow
+    - apache_vhost
+    - deploy
+  when: not webserver_nginx
+
+- name: add nginx vhost if configured
+  include_role:
+    name: nginx_vhost
+  vars:
+    hostname: "{{ taxonoverflow_hostname }}"
+    context_path: "{{ taxonoverflow_context_path }}"
+  tags:
+    - nginx_vhost
+    - deploy
+    - taxonoverflow
+  when: webserver_nginx
+
+- include: ../../tomcat_deploy/tasks/main.yml war_url='{{ taxonoverflow_war_url }}' context_path='{{ taxonoverflow_context_path }}' hostname='{{ taxonoverflow_hostname }}'
+  tags:
+    - taxonoverflow
+    - tomcat_vhost
+    - deploy

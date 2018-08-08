@@ -1,0 +1,8 @@
+- hosts: ala-bie
+  roles:
+    - common
+    - java
+    - webserver
+    - tomcat
+    - bie-hub
+    - ala-bie

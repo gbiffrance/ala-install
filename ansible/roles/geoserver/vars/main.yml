@@ -1,0 +1,6 @@
+groupId: "org.geoserver"
+version: "{{ geoserver_version | default('2.11.1') }}"
+artifactId: "geoserver"
+packaging: "war"
+classifier: "war"
+geoserver_war_url: "{{maven_repo_ws_url}}"

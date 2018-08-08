@@ -1,0 +1,10 @@
+use_gbif_nexus: "true"
+maven_release_dir: "releases"
+
+version: "{{ ipt_version | default('LATEST') }}"
+artifactId: "ipt"
+classifier: ''
+groupId: "org.gbif"
+packaging: "war"
+ipt_war_url: "{{maven_repo_ws_url}}"
+

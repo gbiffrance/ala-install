@@ -1,0 +1,20 @@
+# The SDS installation on CSIRO IM&T VM
+  
+[common]
+vagrant1
+
+[sds]
+vagrant1
+
+[sds:vars]
+sds_hostname=sds.vagrant1.ala.org.au
+
+is_vagrant=true
+local_repo_dir = ~/.ala
+data_dir=/srv/data
+base_url = sds.vagrant1.ala.org.au
+sds_url = http://sds.vagrant1.ala.org.au
+sds_context_path = 
+
+auth_base_url=https://auth.ala.org.au
+auth_cas_url=https://auth.ala.org.au/cas

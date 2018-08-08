@@ -1,0 +1,95 @@
+- include: ../../common/tasks/setfacts.yml
+  tags:
+    - image-service
+
+- name: create images database
+  postgresql_db: name=images
+  become_user: postgres
+  sudo: True
+  tags:
+    - db
+    - image-service
+
+- name: create database user images 
+  postgresql_user: db=images name={{ images_db_username }} password={{ images_db_password }} priv=ALL state=present
+  become_user: postgres
+  sudo: True
+  tags:
+    - db
+    - image-service
+
+- include: ../../apache_vhost/tasks/main.yml context_path='{{ images_context_path }}' hostname='{{ images_hostname }}'
+  tags:
+    - deploy
+    - apache_vhost
+    - image-service
+  when: not webserver_nginx
+
+- name: add nginx vhost if configured
+  include_role:
+    name: nginx_vhost
+  vars:
+    hostname: "{{ images_hostname }}"
+    context_path: "{{ images_context_path }}"
+  tags:
+    - nginx_vhost
+    - deploy
+    - image-service
+  when: webserver_nginx
+
+- include: ../../tomcat_deploy/tasks/main.yml war_url='{{ images_url }}' context_path='{{ images_context_path }}' hostname='{{ images_hostname }}'
+  tags:
+    - deploy
+    - tomcat_vhost
+    - image-service    
+
+- name: ensure www directory exists
+  file: path={{item}} state=directory owner={{tomcat_user}}  group={{tomcat_user}}
+  with_items:
+    - "/srv/{{ images_hostname }}/www"
+  tags:
+    - image-service
+
+- name: Create symlink to data/biocache-media from /srv/[hostname]/www/html/biocache-media
+  command: "ln -s /data/images/store /srv/{{ images_hostname }}/www/store" 
+  ignore_errors: yes
+  tags: 
+    - image-service
+
+- name: ensure target directories exist [data subdirectories etc.]
+  file: path={{item}} state=directory owner={{tomcat_user}} group={{tomcat_user}}
+  with_items:
+    - "{{data_dir}}/images/config"
+  tags:
+    - image-service
+
+- name: ensure target directories exist [data subdirectories etc.]
+  file: path={{item}} state=directory owner={{tomcat_user}}  group={{tomcat_user}} 
+  with_items:
+    - "{{data_dir}}/images/config"  
+    - "{{data_dir}}/images/elasticsearch"  
+    - "{{data_dir}}/images/store"
+    - "{{data_dir}}/images/incoming"
+    - "{{data_dir}}/images/bin/imgcnv"
+  tags:
+    - image-service
+
+- name: copy all config.properties
+  template: src=config/config.properties dest={{data_dir}}/images/config/images-config.properties
+  tags:
+    - properties
+    - image-service
+
+- name: set data ownership
+  file: path={{data_dir}}/{{images_app}} owner={{tomcat_user}} group={{tomcat_user}} recurse=true state=directory
+  notify: 
+    - restart tomcat
+  tags:
+    - image-service
+
+- name: set data ownership
+  file: path={{data_dir}}/images owner={{tomcat_user}} group={{tomcat_user}} recurse=true
+  notify:
+    - restart tomcat
+  tags:
+    - image-service

@@ -1,0 +1,7 @@
+# assets
+version: "{{ logger_version | default('LATEST') }}"
+artifactId: "logger-service"
+groupId: "au.org.ala"
+classifier: ''
+packaging: "war"
+logger_war_url: "{{maven_repo_ws_url}}"

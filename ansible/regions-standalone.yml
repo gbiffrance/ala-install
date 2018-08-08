@@ -1,0 +1,7 @@
+- hosts: regions
+  roles:
+    - { role: common, regions: regions }
+    - { role: java, regions: regions }
+    - webserver
+    - tomcat
+    - { role: regions, regions: regions }

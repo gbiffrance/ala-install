@@ -1,0 +1,28 @@
+# common handlers that various roles can call
+
+- name: restart tomcat
+  service: name={{tomcat}} state=restarted
+
+- name: restart httpd
+  service: name={{apache}} state=restarted
+
+- name: restart apache
+  service: name={{apache}} state=restarted
+
+- name: reload apache
+  service: name={{apache}} state=reloaded
+
+- name: restart mysql
+  service: name={{mysql_service}} state=restarted
+
+- name: reload nginx
+  service: name={{nginx}} state=reloaded
+
+- name: restart nginx
+  service: name={{nginx}} state=restarted
+
+- name: reload postfix
+  service: name={{postfix}} state=reloaded
+
+- name: restart postfix
+  service: name={{postfix}} state=restarted

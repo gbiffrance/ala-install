@@ -1,0 +1,9 @@
+version: "{{ sandbox_version | default('LATEST') }}"
+artifactId: "sandbox"
+classifier: ''
+packaging: "war"
+
+sandbox_war_url: "{{maven_repo_ws_url}}"
+
+additional_proxy_pass_values:
+  - { src: "/biocache-media", dest: "!" }

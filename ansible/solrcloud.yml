@@ -1,0 +1,11 @@
+- hosts: zookeeper
+  roles:
+    - zookeeper
+- hosts: solrcloud
+  roles:
+    - common
+    - java
+    - solrcloud
+- hosts: solrcloud_config
+  roles:
+    - solrcloud_config

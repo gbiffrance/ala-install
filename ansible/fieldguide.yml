@@ -1,0 +1,8 @@
+- hosts: fieldguide
+  roles:
+    - common
+    - java
+    - tomcat
+    - webserver
+    - fieldguide
+    - wkhtmltopdf

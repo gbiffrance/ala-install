@@ -1,0 +1,14 @@
+- hosts: biocache
+  roles:
+    - common
+    - java
+    - tomcat
+    - cassandra
+    - webserver
+    - nameindex
+    - solr
+    - biocache-db
+    - biocache-properties
+    - nameindex
+    - biocache-service
+    - logger-client

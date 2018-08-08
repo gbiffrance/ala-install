@@ -1,0 +1,9 @@
+- hosts: alerts-service
+  roles:
+    - common
+    - postfix    
+    - java
+    - tomcat
+    - webserver
+    - mysql-5.7    
+    - alerts

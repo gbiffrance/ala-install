@@ -1,0 +1,5 @@
+# assets
+version: "{{ dashboard_version | default('LATEST') }}"
+artifactId: "dashboard"
+groupId: "au.org.ala"
+dashboard_war_url: "{{maven_repo_ws_url}}"

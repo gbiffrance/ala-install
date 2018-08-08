@@ -1,0 +1,10 @@
+# application versions
+regions_config: "{{regions}}-config.properties"
+
+# assets
+version: "2.5-SNAPSHOT"
+artifactId: "{{ regions | default('regions')}}"
+classifier: ''
+packaging: "war"
+groupId: "{{ regions_group_id | default('au.org.ala') }}"
+regions_war_url: "{{maven_repo_ws_url}}"

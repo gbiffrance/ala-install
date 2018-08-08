@@ -1,0 +1,6 @@
+groupId: ""
+version: ""
+artifactId: ""
+packaging: ""
+classifier: ""
+geonetwork_war_url: "https://jaist.dl.sourceforge.net/project/geonetwork/GeoNetwork_opensource/v3.4.1/geonetwork.war"

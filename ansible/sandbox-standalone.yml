@@ -1,0 +1,7 @@
+- hosts: sandbox
+  roles:
+    - common
+    - java
+    - webserver
+    - tomcat
+    - sandbox

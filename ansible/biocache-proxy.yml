@@ -1,0 +1,7 @@
+- hosts: biocache-proxy
+  roles:
+    - common
+    - augeas
+    - webserver
+    - tomcat    
+    - biocache-proxy    

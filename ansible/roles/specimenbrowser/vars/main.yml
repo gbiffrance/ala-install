@@ -1,0 +1,7 @@
+# assets
+version: "1.2"
+artifactId: "specimenbrowser"
+classifier: ''
+packaging: "war"
+groupId: "au.org.ala"
+specimenbrowser_war_url: "{{maven_repo_ws_url}}"

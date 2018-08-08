@@ -1,0 +1,7 @@
+# assets
+version: "{{ alerts_version | default('LATEST') }}"
+artifactId: "alerts"
+groupId: "{{ alerts_group_id | default('au.org.ala') }}"
+classifier: ''
+packaging: "war"
+alerts_war_url: "{{ maven_repo_ws_url }}"
