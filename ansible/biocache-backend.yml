@@ -1,11 +1,13 @@
+
 - hosts: biocache
   roles:
     - common
     - java
-    - cassandra
+    - cassandra3
     - nameindex
-    - biocache-db
+    - { role: biocache-db,      use_cassandra3 : true }
     - biocache-properties
-    - biocache-cli
+    - nameindex
+    - { role: biocache-cli,     biocache_cli_version: "2.2" }
     - jenkins
     - apache

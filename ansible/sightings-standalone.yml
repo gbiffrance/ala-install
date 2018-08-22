@@ -1,7 +1,0 @@
-- hosts: sightings
-  roles:
-    - common
-    - java
-    - webserver
-    - tomcat
-    - sightings

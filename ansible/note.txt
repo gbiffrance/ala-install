@@ -1,0 +1,2 @@
+Avant de lancer les scripts sur la VM :
+- sudo apt install python-minimal python-simplejson

@@ -8,16 +8,21 @@
 # You'll need to replace "12.12.12.12" with the IP address of your newly created
 # Ubuntu 14 instance.
 #
-# ansible-playbook --private-key ~/.ssh/MyPrivateKey.pem -u ubuntu -s -i ansible/inventories/demo-ec2 ansible/ala-demo.yml
+# ansible-playbook --private-key ~/.ssh/MyPrivateKey.pem -u ubuntu -s -i ansible/inventories/ala-demo ansible/ala-demo-cassandra3-solr6.yml
 #
 ###############################################################################
 
-[nameindexer]
-52.28.65.182
+[solr5-server]
+solr.gbif.fr
 
-[nameindexer:vars]
+[solr5-server:vars]
 data_dir=/data
 
-nameindexer_opts=-Xmx4g -Xms4g
+solr_hostname = solr.gbif.fr
+solr_url = http://solr.gbif.fr:8983/
+solr_base_url = http://solr.gbif.fr:8983
+solr_context_path = /
+solr_host = solr.gbif.fr
+solr_port = 8983
 
-ala_name_matching_version=3.1-SNAPSHOT
+solr_heap = 3g

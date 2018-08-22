@@ -12,48 +12,58 @@
 #
 ###############################################################################
 
-[ala-demo]
-living-atlas.org
+[biocache]
+cassandra.gbif.fr
 
-[ala-demo:vars]
+[biocache:vars]
 # Mounted storage is usually /mnt on EC2. Create a symlink to /mnt -> /data
 data_dir=/data
 
-demo_hostname = living-atlas.org
+demo_hostname = portail.gbif.fr
 
 ############# GBIF Name matching index
 
 custom_namematching_url = https://s3.amazonaws.com/ala-nameindexes/latest/namematching-gbif-lucene5.tgz
 nameindex_to_use = custom
 
+technical.contact= dev@gbif.fr
+
 ####################### Biocache ##############################################
 
+biocache_db_type= cassandra3
 biocache_db_host = localhost
-biocache_db_type = cassandra3
-biocache_db_port = 9042
 cassandra_listen_host = localhost
-biocache_service_hostname = living-atlas.org
-biocache_service_url = http://living-atlas.org/biocache-service
-biocache_service_base_url = http://living-atlas.org
-biocache_service_context_path = /biocache-service
+local_node_ip=127.0.0.1
+
+biocache_service_hostname = recherche-ws.gbif.fr
+biocache_service_url = http://recherche-ws.gbif.fr/
+biocache_service_base_url = http://recherche-ws.gbif.fr
+biocache_service_context_path = /
+
 logging_enabled = true
-default_country =
-layers_service_url =
+name_index_dir = /data/lucene/namematching
+default_country = fr
+layers_service_url = layers.gbif.fr
 layers_service_sampling = false
-enable_lists = true
-lists_service_url = http://living-atlas.org/specieslists
+enable_lists = false
+bie_service_enabled = false
+
+download_url=http://recherche-ws.gbif.fr/biocache-download
+download_auth_sensitive=true
+
+lists_service_url = http://listes.gbif.fr
 registry_api_key = dummy-registry-api-key
-commonname_lang = en
+commonname_lang = fr
 media_store_local = false
-media_store_url=http://living-atlas.org/images
+media_store_url=http://images.gbif.fr
 download_dir=/data/biocache-download
 
 ####################### Hub ###################################################
 
-biocache_hub_hostname = living-atlas.org
-biocache_hub_url = http://living-atlas.org/ala-hub
-biocache_hub_base_url = http://living-atlas.org
-biocache_hub_context_path = /ala-hub
+biocache_hub_hostname = recherche.gbif.fr
+biocache_hub_url = http://recherche.gbif.fr
+biocache_hub_base_url = http://recherche.gbif.fr
+biocache_hub_context_path = /
 userdetails_url = https://auth.ala.org.au/userdetails/userDetails
 
 google_apikey = AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk
@@ -61,33 +71,39 @@ google_apikey = AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk
 # this is disabled to avoid startup problems
 caches_collections_enabled = false
 
-org_url = http://living-atlas.org
+org_url = http://www.gbif.fr
 
-skin_orgNameLong = Living Atlas Demo
-orgNameLong = Living Atlas Demo
-orgNameShort = Living Atlas Demo
+skin_orgNameLong = GBIF France
+orgNameLong = GBIF France
+orgNameShort = GBIF France
 
-explore_your_area_lat = 40.4168
-explore_your_area_lng = -3.7038
-explore_your_area_location = Madrid
+explore_your_area_lat = 46.227600
+explore_your_area_lng = 2.213700
+explore_your_area_location = Gouzon
 
-map_default_latitude = 40.4168
-map_default_longitude = -3.7038
+map_default_latitude = 46.227600
+map_default_longitude = 2.213700
 map_default_zoom = 5
 
-skin_layout = generic
+skin.layout = ala
+skin.benin.layout = generic
 skin_fluid_layout = true
 
+skin.orgNameLong = GBIF France
+skin.orgNameShort = GBIF France
+skin.benin.orgNameLong = GBIF Bénin
+skin.benin.orgNameShort = GBIF Bénin
+
 use_ala_image_service = true
-image_service_url = http://living-atlas.org/images
-image_service_viewer_url = http://living-atlas.org/images/image/viewer?imageId=
-image_service_metadata_url = http://living-atlas.org/images/image/details?imageId=
+image_service_url = http://images.gbif.fr
+image_service_viewer_url = http://images.gbif.fr/image/viewer?imageId=
+image_service_metadata_url = http://images.gbif.fr/image/details?imageId=
 alwaysshow_imagetab = true
 
 use_download_plugin=true
-downloads_indexed_download_url=http://living-atlas.org/biocache-service/occurrences/offline/download
-downloads_checklist_download_url=http://living-atlas.org/biocache-service/occurrences/facets/download
-downloads_indexed_fields_url=http://living-atlas.org/biocache-service/index/fields
+downloads_indexed_download_url=http://recheche-ws.gbif.fr/occurrences/offline/download
+downloads_checklist_download_url=http://recheche-ws.gbif.fr/occurrences/facets/download
+downloads_indexed_fields_url=http://recheche-ws.gbif.fr/index/fields
 downloads.fieldguideDownloadUrl =
 downloads.staticDownloadsUrl =
 downloads.termsOfUseUrl =
@@ -97,11 +113,11 @@ downloads.termsOfUseUrl =
 
 ####################### Collectory ############################################
 
-collectory_hostname = living-atlas.org
-collectory_url = http://living-atlas.org/collectory
-collectory_service_url = http://living-atlas.org/collectory/ws
-collectory_base_url = http://living-atlas.org
-collectory_context_path = /collectory
+collectory_hostname = metadonnees.gbif.fr
+collectory_url = http://metadonnees.gbif.fr
+collectory_service_url = http://metadonnees.gbif.fr/ws
+collectory_base_url = http://metadonnees.gbif.fr
+collectory_context_path = /
 collectory_db_host_address = localhost
 collectory_db_host = localhost
 collectory_db_user = collectory
@@ -114,8 +130,8 @@ api_key = dummy-registry-api-key
 # Google maps
 google_apikey = AIzaSyAJDtEeoy7Sc9pij2TAoVnmTwA34Q-2VHk
 
-orgNameLong = Living Atlas demo
-orgNameShort = Living Atlas demo
+orgNameLong = GBIF France
+orgNameShort = GBIF France
 
 # CAS
 uri_filter_pattern = /dummy
@@ -130,24 +146,26 @@ api_key = to_be_added
 skin = ala
 
 # Map config
-collections_map_lat = 40.4168
-collections_map_lon = -3.7038
+collections_map_lat = 46.227600
+collections_map_lon = 2.213700
 collections_map_zoom = 5
 
 # Project name
-orgNameShort = Living Atlas demo
-orgNameLong = Living Atlas demo
-region = Spain
+skin.orgNameLong = GBIF France
+skin.orgNameShort = GBIF France
+skin.benin.orgNameLong = GBIF Bénin
+skin.benin.orgNameShort = GBIF Bénin
+region = Europe
 
 # EML config
-eml_delivery_point = Smith Street
-eml_city = Leipzig
-eml_admin_area = Spain
-eml_postal_code = S21 2SS
-eml_country = Spain
+eml_delivery_point = Jardin des plantes
+eml_city = Paris
+eml_admin_area = France
+eml_postal_code = 75005
+eml_country = France
 
 # Disable UI components
-disable_map = true
+disable_map = false
 disable_alerts = true
 disable_logger = false
 
@@ -158,33 +176,33 @@ api_key_check_enabled = false
 gbifApiUrl = http://api.gbif.org/v1
 
 # Logger URL
-logger_webservice_url = http://living-atlas.org/logger-service/service
+logger_webservice_url = http://logger-service.gbif.fr/service
 
 # Species list tool
-species_list_tool_url = http://living-atlas.org/specieslists
+species_list_tool_url = http://listes.gbif.fr
 
 ####################### SOLR #######################
 
-solr_hostname = living-atlas.org
-solr_url = http://living-atlas.org:8983/solr/biocache
-solr_base_url = http://living-atlas.org:8983
+solr_hostname = solr.gbif.fr
+solr_url = http://solr.gbif.fr:8983/solr/biocache
+solr_base_url = http://solr.gbif.fr:8983
 solr_context_path = /solr
-solr_host = living-atlas.org
+solr_host = solr.gbif.fr
 solr_port = 8983
 
 solr_heap = 10g
 
-sandbox_hostname = living-atlas.org
-sandbox_url = http://living-atlas.org/sandbox
-sandbox_base_url = http://living-atlas.org
+sandbox_hostname = portail.gbif.fr
+sandbox_url = http://portail.gbif.fr/sandbox
+sandbox_base_url = http://portail.gbif.fr
 sandbox_context_path = /sandbox
 
 ################# Logger Service ############
 
-logger_hostname = living-atlas.org
-logger_url = http://living-atlas.org/logger-service
-logger_base_url = http://living-atlas.org
-logger_context_path = /logger-service
+logger_hostname = logger-service.gbif.fr
+logger_url = http://logger-service.gbif.fr
+logger_base_url = http://logger-service.gbif.fr
+logger_context_path = /
 logger_db_name = logger
 logger_db_username = logger_user
 logger_db_password = logger_user
@@ -197,7 +215,9 @@ auth_cas_url = https://auth.ala.org.au/cas
 
 ####### When near the GBIF building (e.g. in Europe) the GBIF nexus will likely be fastest #########
 
-use_gbif_nexus = false
+use_gbif_nexus = "false"
+
+collectory_maven_repo_ws_url = https://repository.gbif.org/repository/gbif-france-releases/fr/gbif/portail/gbiffrance-collectory/2.04/gbiffrance-collectory-2.04.war
 
 ####### Disable SDS checks for the demo #######
 
@@ -208,37 +228,37 @@ sds_enabled = false
 biocache_opts = -Xmx1g -Xms1g
 
 ############## Base header / footer ###############
-header_and_footer_baseurl = http://living-atlas.org
+header_and_footer_baseurl = http://layout.gbif.fr
 
 ###### favicon #######
-skin_favicon = https://www.gbif.org/favicon-16x16.png
+skin_favicon = http://layout.gbif.fr/picture/favicon.ico
 
 ######### Species list ##############
 
-specieslist_hostname = living-atlas.org
-specieslist_url = http://living-atlas.org/specieslists
-specieslist_base_url = http://living-atlas.org
-specieslist_context_path = /specieslists
+specieslist_hostname = listes.gbif.fr
+specieslist_url = http://listes.gbif.fr/specieslists
+specieslist_base_url = http://listes.gbif.fr
+specieslist_context_path = /
 specieslist_db_hostname = localhost
 specieslist_db_name = specieslists
 specieslist_db_username = specieslists
 specieslist_db_password = password
 collectory_enable_sync = false
-biocache_base_url = http://living-atlas.org/ala-hub
-bie_service_base_url = http://living-atlas.org/bie-index
+biocache_base_url = http://recherche.gbif.fr
+bie_service_base_url = http://bie.gbif.fr
 field_guide_base_url =
 
 ############# BIE index ################
 
-bie_index_base_url = http://living-atlas.org
-bie_index_context_path = /bie-index
-bie_index_hostname = living-atlas.org
+bie_index_base_url = http://bie.gbif.fr
+bie_index_context_path = /
+bie_index_hostname = bie.gbif.fr
 
-index_live_url = http://localhost:8983/solr/bie
-index_offline_url = http://localhost:8983/solr/bie-offline
+index_live_url = http://solr.gbif.fr:8983/solr/bie
+index_offline_url = http://solr.gbif.fr:8983/solr/bie-offline
 
-biocache_solr_url = http://localhost:8983/solr/biocache
-collectory_url = http://living-atlas.org/collectory
+biocache_solr_url = http://solr.gbif.fr:8983/solr/biocache
+collectory_url = http://metadonnees.gbif.fr
 
 disable_cas = true
 bypass_cas = true
@@ -249,22 +269,25 @@ index_images = true
 
 bie_skin_layout = generic
 bie_hub = ala-bie
-bie_hub_base_url = http://living-atlas.org
-bie_hub_context_path = /ala-bie
-bie_hub_hostname = living-atlas.org
-species_list_url = http://living-atlas.org/specieslists
+bie_hub_base_url = http://bie.gbif.fr
+bie_hub_context_path = /
+bie_hub_hostname = bie.gbif.fr
+species_list_url = http://listes.gbif.fr
 sightings_url =
 alerts_url =
 spatial_url =
 
-bie_base_url = http://living-atlas.org/ala-bie
-ala_base_url = http://living-atlas.org
+bie_base_url = http://bie.gbif.fr
+ala_base_url = http://recherche.gbif.fr
 
 ####### Images #######
 
-images_url = http://living-atlas.org
-images_base_url = http://living-atlas.org
-images_context_path = /images
-images_hostname = living-atlas.org
+images_url = http://images.gbif.fr
+images_base_url = http://images.gbif.fr
+images_context_path = /
+images_hostname = images.gbif.fr
 images_db_password = images
 images_db_username = images
+
+
+download_email_subject = '[hubName] Le téléchargement des occurrences est terminé - [filename]'

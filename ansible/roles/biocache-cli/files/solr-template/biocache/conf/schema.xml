@@ -473,8 +473,8 @@
     <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
 
 
-    <fieldType name="quad"      class="solr.SpatialTermQueryPrefixTreeFieldType" units="degrees" />
-    <fieldType name="geohash"   class="solr.SpatialRecursivePrefixTreeFieldType" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" units="degrees"  datelineRule="ccwRect"   autoIndex="true" validationRule="none"  />
+    <fieldType name="quad"      class="solr.SpatialTermQueryPrefixTreeFieldType" distanceUnits="degrees" />
+    <fieldType name="geohash"   class="solr.SpatialRecursivePrefixTreeFieldType" spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory" distanceUnits="degrees"  datelineRule="ccwRect"   autoIndex="true" validationRule="none"  />
 
  </types>
 

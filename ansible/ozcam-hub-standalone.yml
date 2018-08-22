@@ -1,6 +1,0 @@
-- hosts: ozcam-hub-standalone
-  roles:
-    - common
-    - java
-    - webserver
-    - { role: biocache-hub, biocache_hub: ozcam-hub, grouped_facets_json: grouped_facets_ozcam.json }

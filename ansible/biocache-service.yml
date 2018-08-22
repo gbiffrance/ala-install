@@ -3,12 +3,6 @@
     - common
     - java
     - tomcat
-    - cassandra
     - webserver
-    - nameindex
-    - solr
-    - biocache-db
     - biocache-properties
-    - nameindex
-    - biocache-service
-    - logger-client
+    - { role: biocache-service, biocache_service_version: "2.1.6" }

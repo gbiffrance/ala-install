@@ -1,8 +1,0 @@
-- hosts: sampling-service
-  roles:
-    - java
-    - common
-    - tomcat
-    - webserver
-    - sampling-service
-    - sampling-service-apache

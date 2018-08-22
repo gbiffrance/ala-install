@@ -1,7 +1,0 @@
-- hosts: dashboard
-  roles:
-    - common
-    - java
-    - tomcat
-    - webserver
-    - dashboard

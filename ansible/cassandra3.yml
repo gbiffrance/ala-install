@@ -1,5 +1,0 @@
-- hosts: cassandra3
-  roles:
-    - common
-    - java
-    - cassandra3

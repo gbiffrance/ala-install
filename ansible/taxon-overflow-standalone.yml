@@ -1,9 +1,0 @@
-- hosts: taxon-overflow
-  roles:
-    - common
-    - java
-    - tomcat
-    - webserver
-    - postgresql
-    - postfix
-    - taxon-overflow
