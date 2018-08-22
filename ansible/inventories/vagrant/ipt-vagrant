@@ -4,9 +4,8 @@ vagrant1
   
 [ipt:vars]
 data_dir = /data
-is_vagrant = true
 
-ipt_url = http://ipt.vagrant1.ala.org.au
-ipt_base_url = http://ipt.vagrant1.ala.org.au
-ipt_context_path = 
-ipt_hostname = ipt.vagrant1.ala.org.au
+ipt_url = http://vagrant1.ala.org.au/ipt
+ipt_base_url = http://vagrant1.ala.org.au
+ipt_context_path = /ipt
+ipt_hostname = vagrant1.ala.org.au

@@ -1,6 +1,9 @@
 - include: ../../common/tasks/setfacts.yml
   tags:
     - biocache-cli
+    - vocabs
+    - properties
+    - biocache-cli-update
 
 - name: ensure biocache directory exists
   file: path=/usr/lib/biocache state=directory
@@ -17,25 +20,38 @@
   copy: src=lib/log4j.xml dest=/usr/lib/biocache/log4j.xml
   tags:
     - biocache-cli
+    - properties
 
 - name: copy biocache logging config
   copy: src=config/subgroups.json dest={{data_dir}}/biocache/config/subgroups.json
   tags:
-    - biocache-cli    
+    - biocache-cli
+    - properties
+
+- name: copy vocabs
+  copy: src={{ item }} dest=/data/biocache
+  with_items:
+    - "vocab"
+  tags:
+    - biocache-cli
+    - vocabs
+    - properties
 
 - name: copy biocache store jar
   get_url: url={{biocache_store_url}} dest="/usr/lib/biocache/biocache.zip" force=yes timeout=240
   when: biocache_local_build is not defined
   tags:
     - biocache-cli  
-    - download-zip  
+    - download-zip
+    - biocache-cli-update
 
 - name: copy local biocache store jar
   copy: src={{biocache_local_build}} dest="/usr/lib/biocache/biocache.zip" force=yes
   when: biocache_local_build is defined
   tags:
     - biocache-cli  
-    - download-zip  
+    - download-zip
+    - biocache-cli-update
 
 - name: install unzip (Debian only)
   apt: pkg=unzip state=present
@@ -44,31 +60,26 @@
     - biocache-cli  
 
 - name: unjar biocache
-  shell: "unzip /usr/lib/biocache/biocache.zip -d /usr/lib/biocache/"
+  unarchive:
+    src: /usr/lib/biocache/biocache.zip
+    dest: /usr/lib/biocache/
+    remote_src: True
   tags:
-    - biocache-cli  
+    - biocache-cli
+    - biocache-cli-update
 
-- name: create the templated biocache.sh
-  template: src=biocache.sh dest=/usr/lib/biocache/biocache mode=777
+- name: make the symlink for /usr/bin/biocache
+  file: src=/usr/lib/biocache/biocache-store-{{ version }}/bin/biocache dest=/usr/bin/biocache state=link
   tags:
-    - biocache-cli  
+    - biocache-cli
+    - biocache-cli-symlink
+    - biocache-cli-update
 
-- name: clean biocache existing extract
-  shell: "mv /usr/lib/biocache/biocache-store-*.jar /usr/lib/biocache/biocache.jar"
-  ignore_errors: yes
+- name: replace the environmentSetupFile
+  template: src=environmentSetupFile.sh dest=/usr/lib/biocache/biocache-store-{{ version }}/bin/environmentSetupFile.sh force=yes mode=755
   tags:
-    - biocache-cli  
-
-- name: create biocache executable
-  shell: "cat /usr/lib/biocache/biocache.jar >> /usr/lib/biocache/biocache"
-  ignore_errors: yes  
-  tags:
-    - biocache-cli  
-
-- name: make the symlink for /usr/bin/biocache 
-  file: src=/usr/lib/biocache/biocache dest=/usr/bin/biocache state=link
-  tags:
-    - biocache-cli  
+    - biocache-cli
+    - biocache-cli-update
 
 - name: create the reindex directory
   file: path={{item}} state=directory mode=777

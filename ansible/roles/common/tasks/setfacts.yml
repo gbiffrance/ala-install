@@ -16,6 +16,8 @@
     tomcat_conf_dir: /etc/tomcat7
     tomcat_log_dir: /var/log/tomcat7
     apache: apache2
+    nginx: nginx
+    postfix: postfix
     mysql_service: mysql
     cassandra_yaml: /etc/cassandra/cassandra.yaml
     cassandra_user: cassandra
@@ -33,6 +35,7 @@
     tomcat_conf: /etc/tomcat6/tomcat6.conf
     tomcat_conf_dir: /etc/tomcat6
     apache: httpd
+    nginx: nginx
     mysql_service: mysqld
     cassandra_yaml: /etc/cassandra/conf/cassandra.yaml
     cassandra_user: cassandra
@@ -42,36 +45,54 @@
   tags:
     - setfacts
 
+
+- name: set java defaults for java open jdk7
+  set_fact:
+    java_home: /usr/lib/jvm/java-8-oracle
+  when: use_openjdk7 is defined
+  tags:
+    - setfacts
+
+- name: set java defaults for java 8
+  set_fact:
+    java_home: /usr/lib/jvm/java-8-oracle
+  when: use_openjdk7 is not defined
+  tags:
+    - setfacts
+
 - name: set name index date
   set_fact:
-      name_index_date: "{{ nameindex_datestamp | default('20160811') }}"
+      name_index_date: "{{ nameindex_datestamp | default('latest') }}"
   tags:
     - setfacts
 
 - name: set name data date
   set_fact:
-      name_data_date: "{{ namedata_datestamp | default('20160811') }}"
+      name_data_date: "{{ namedata_datestamp | default('latest') }}"
   tags:
     - setfacts
 
-
-- name: set name index location
+- name: set name index location with date {{name_index_date}}
   set_fact:
-    aws_name_indexes_repo: http://s3.amazonaws.com/ala-nameindexes/20140610
-    ala_name_indexes_repo: "{{ ala_nameindex_source_url | default('http://ala-starr.it.csiro.au/archives/nameindexes') }}/{{name_index_date}}"
-    ala_name_data_repo: "{{ ala_namedata_source_url | default('http://ala-starr.it.csiro.au/archives/nameindexes') }}/{{name_data_date}}"
+    aws_name_indexes_repo: "{{ aws_nameindex_source_url | default('https://s3.amazonaws.com/ala-nameindexes/latest') }}"
+    ala_name_indexes_repo: "{{ ala_nameindex_source_url | default('https://archives.ala.org.au/archives/nameindexes') }}/{{name_index_date}}"
+    ala_name_data_repo: "{{ ala_namedata_source_url | default('https://archives.ala.org.au/archives/nameindexes') }}/{{name_data_date}}"
   tags:
     - setfacts    
 
 - name: using the ALA nexus repository
   set_fact:
-    maven_repo_ws_url: "http://nexus.ala.org.au/service/local/artifact/maven/redirect?r={{maven_release_dir | default('public')}}&g={{groupId | default('au.org.ala')}}&a={{artifactId | default('')}}&v={{version | default('')}}&e={{packaging | default('war')}}&c={{classifier | default('')}}"
+    maven_repo_base_url: "https://nexus.ala.org.au/content/groups/"
+    maven_repo_url: "https://nexus.ala.org.au/content/groups/{{maven_release_dir|default('public')}}"
+    maven_repo_ws_url: "https://nexus.ala.org.au/service/local/artifact/maven/redirect?r={{maven_release_dir | default('public')}}&g={{groupId | default('au.org.ala')}}&a={{artifactId | default('')}}&v={{version | default('')}}&e={{packaging | default('war')}}&c={{classifier | default('')}}"
   when: use_gbif_nexus is not defined or use_gbif_nexus == "false"
   tags:
     - setfacts  
 
 - name: using the GBIF nexus repository
   set_fact:
+    maven_repo_base_url: "http://repository.gbif.org/content/groups/"
+    maven_repo_url: "http://repository.gbif.org/content/groups/{{maven_release_dir|default('ala-release')}}"
     maven_repo_ws_url: "http://repository.gbif.org/service/local/artifact/maven/redirect?r={{maven_release_dir | default('ala-release')}}&g={{groupId | default('au.org.ala')}}&a={{artifactId | default('')}}&v={{version | default('')}}&e={{packaging | default('war')}}&c={{classifier | default('')}}"
   when: use_gbif_nexus is defined and use_gbif_nexus == "true"
   tags:
@@ -88,15 +109,24 @@
 - name: setup name sources
   set_fact:
     ala_name_sources:
-      - AFD
-      - APNI
-      - AusFungi
-      - AusMoss
-      - CAAB
-      - CAAB-Identifier
-      - CAAB-Vernacular
-      - NZOR
-      - CoL
-      - ALA
+      - combined
   tags:
     - setfacts
+
+- name: set whether webserver is apache or nginx
+  set_fact:
+    webserver_nginx: "{{ webserver_nginx | default(false) }}"
+
+- name: set exec_jar as default value
+  set_fact:
+      exec_jar: false
+  tags:
+    - setfacts
+
+- name: set deployment packaging
+  set_fact:
+      exec_jar: true
+  when: packaging is defined and packaging == "jar"
+  tags:
+    - setfacts
+

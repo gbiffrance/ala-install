@@ -3,7 +3,7 @@
     - common
     - java
     - tomcat
-    - apache
-    - mysql
+    - webserver
+    - mysql-5.7
     - nameindex
     - species-list
